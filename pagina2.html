@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>💕</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== SCROLL ===== */
+body{
+    margin:0;
+    min-height:160vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-family:'Poppins', sans-serif;
+    background:#ff9ecb;
+    overflow-y:auto;
+}
+
+/* ===== CORAZONES ===== */
+.corazon{
+    position:absolute;
+    font-size:220px;
+    opacity:0.12;
+    pointer-events:none;
+    animation:flotar 6s ease-in-out infinite;
+}
+
+.c1{ top:10%; left:8%; }
+.c2{ bottom:15%; right:10%; transform:rotate(180deg); }
+.c3{ top:40%; right:35%; }
+
+@keyframes flotar{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
+
+/* ===== CUADRO CENTRAL ===== */
+.contenedor{
+    margin-top:120px;
+    width:70vw;
+    max-width:520px;
+    padding:60px 35px;
+    border-radius:35px;
+    background:rgba(255,182,217,0.75);
+    backdrop-filter: blur(12px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    box-shadow:0px 12px 30px rgba(0,0,0,0.25);
+}
+
+/* ===== TEXTO ===== */
+.mensaje{
+    font-size:38px;
+    color:white;
+    font-family:'Pacifico', cursive;
+    text-shadow:0 4px 10px rgba(0,0,0,0.25);
+    min-height:50px;
+}
+
+.submensaje{
+    margin-top:20px;
+    font-size:24px;
+    color:white;
+    font-weight:500;
+    letter-spacing:1px;
+    text-shadow:0 3px 8px rgba(0,0,0,0.25);
+    min-height:30px;
+}
+
+/* ===== IMAGEN ===== */
+.imagen-amor{
+    margin-top:30px;
+    width:230px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    animation:latido 1.8s ease-in-out infinite;
+}
+
+@keyframes latido{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.08); }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- CORAZONES -->
+<div class="corazon c1">💖</div>
+<div class="corazon c2">💖</div>
+<div class="corazon c3">💖</div>
+
+<!-- CUADRO -->
+<div class="contenedor">
+
+    <div class="mensaje" id="mensaje"></div>
+    <div class="submensaje" id="submensaje"></div>
+
+    <!-- ⚠️ IMPORTANTE: NO usar ruta de tu PC -->
+    <img src="c:\Users\JEREMY\Downloads\SanValentin\SANVALENTIN.jpg" class="imagen-amor">
+
+</div>
+
+<!-- 🎵 MUSICA -->
+<audio id="musica" loop>
+    <source src="c:\Users\JEREMY\Downloads\SanValentin\Te Amo (Para Siempre) - Intocable (Letra) [7IoaCY9Rjy4].mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* =========================
+   ACTIVAR MUSICA REAL
+========================= */
+
+const musica = document.getElementById("musica");
+
+function iniciarMusica() {
+    musica.volume = 0.6; // volumen
+    musica.play();
+}
+
+/* intenta reproducir */
+window.addEventListener("load", () => {
+    const intento = musica.play();
+
+    if (intento !== undefined) {
+        intento.catch(() => {
+            // si el navegador bloquea → espera un clic
+            document.addEventListener("click", iniciarMusica, { once:true });
+        });
+    }
+});
+
+
+/* =========================
+   TEXTO ANIMADO
+========================= */
+
+const texto1 = "💕 Sabía que dirías que sí... 💕";
+const texto2 = "Te amo mucho mi QUESITOOO....";
+
+const mensaje = document.getElementById("mensaje");
+const submensaje = document.getElementById("submensaje");
+
+let i = 0;
+let j = 0;
+
+function escribirMensaje(){
+    if(i < texto1.length){
+        mensaje.innerHTML += texto1.charAt(i);
+        i++;
+        setTimeout(escribirMensaje, 60);
+    }else{
+        escribirSubmensaje();
+    }
+}
+
+function escribirSubmensaje(){
+    if(j < texto2.length){
+        submensaje.innerHTML += texto2.charAt(j);
+        j++;
+        setTimeout(escribirSubmensaje, 45);
+    }
+}
+
+escribirMensaje();
+
+</script>
+
+</body>
+</html>
